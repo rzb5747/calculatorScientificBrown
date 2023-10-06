@@ -4,48 +4,56 @@ import java.lang.Math;
 import static java.lang.Math.*;
 
 public class Calculator {
+
     private static double radians;
     public static void main(String[] args) {
+
         Scanner scanner = new Scanner(System.in);
 
         double num1, num2, result;
         String operator;
         String angleUnit;
+        while (true) {
+            System.out.print("\nEnter an operator (^, sqrt, log, ln, S, C,T or q to quit): ");
+            operator = scanner.next();
+            if (operator.equals("q")) {
+                break;
+            }
+            System.out.print("Enter first number: ");
+            num1 = scanner.nextDouble();
 
-        System.out.print("Enter an operator (^, sqrt, log, ln, S, C,T): ");
-        operator = scanner.next();
-        System.out.print("Enter first number: ");
-        num1 = scanner.nextDouble();
+
+            num2 = 0.0;
+            if (operator.equals("^")) {
+                System.out.print("Enter second number: ");
+                num2 = scanner.nextDouble();
+                result = calculateResult(num1, num2, operator);
+                System.out.print("Result: " + result);
+                continue;
 
 
+            }
+            if (operator.equals("sqrt")) {
+                result = calculateResult(num1, num2, operator);
+                System.out.print("Result: " + result);
+                continue;
+            }
+            radians = Math.toRadians((num1));
+            result = calculateResult(num1, num2, operator);
+            System.out.println("degrees or radians?");
+            angleUnit = scanner.next();
+            angleUnit = angleUnit.toLowerCase();
 
-        num2 = 0.0;
-        if (operator.equals("^")) {
-            System.out.print("Enter second number: ");
-            num2 = scanner.nextDouble();
-            result = calculateResult(num1,num2,operator);
-            System.out.print("Result: "+ result);
-            return;
+
+            if (angleUnit.equals("radians")) {
+
+                num1 = Math.toDegrees(num1);
+            }
+            result = calculateResult(num1, num2, operator);
+
+            System.out.print("Result: " + result);
 
         }
-        if (operator.equals("sqrt")) {
-            result = calculateResult(num1,num2,operator);
-            System.out.print("Result: "+ result);
-            return;
-            }
-        radians = Math.toRadians((num1));
-        result = calculateResult(num1,num2,operator);
-        System.out.println("degrees or radians?");
-        angleUnit = scanner.next();
-        angleUnit = angleUnit.toLowerCase();
-
-
-        if (angleUnit.equals("radians")){
-
-            num1 = Math.toDegrees(num1);
-        } result = calculateResult(num1,num2,operator);
-
-        System.out.print("Result: "+ result);
         scanner.close();
     }
 
